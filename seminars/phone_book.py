@@ -15,15 +15,29 @@
 
 # Файл для хранения данных
 
+def main():
+    choise = show_menu()
+    while True:
+        if choice == 1:
+            read_txt(phonebook)
+        elif choice == 2:
+            search_user(phonebook)
+        elif choice == 3:
+            add_user(phonebook)
+        elif choice == 4:
+            import_phonebook(phonebook)
+        elif choice == 5:
+            break
+        else:
+            print("Неверный выбор. Попробуйте снова.")
+
 def show_menu():
-    print("\nВыберите необходимое действие:\n"
-          "1. Отобразить весь справочник\n"
-          "2. Найти абонента по фамилии\n"
-          "3. Найти абонента по номеру телефона\n"
-          "4. Добавить абонента в справочник\n"
-          "5. Сохранить справочник в текстовом формате\n"
-          "6. Закончить работу")
-    choice = int(input())
+    print("1. Отобразить весь справочник\n"
+          "2. Найти абонента \n"
+          "3. Добавить абонента в справочник\n"
+          "4. Сохранить справочник в текстовом формате\n"
+          "5. Закончить работу")
+    choice = int(input("Выберите необходимое действие: "))
     return choice
 
 show_menu()
