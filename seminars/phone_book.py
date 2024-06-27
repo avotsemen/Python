@@ -15,11 +15,14 @@
 
 # Файл для хранения данных
 
+filename = 'phone.txt'
+
 def main():
-    choise = show_menu()
+    phonebook = read_txt(filename)
     while True:
+        choice = show_menu()
         if choice == 1:
-            read_txt(phonebook)
+            print(print_phonebook(phonebook))
         elif choice == 2:
             search_user(phonebook)
         elif choice == 3:
@@ -40,4 +43,24 @@ def show_menu():
     choice = int(input("Выберите необходимое действие: "))
     return choice
 
-show_menu()
+def read_txt(filename): 
+
+    phone_book=[]
+
+    fields= ['Фамилия', 'Имя', 'Телефон', 'Описание']
+
+    with open(filename,'r',encoding='utf-8') as phb:
+
+        for line in phb:
+           record = dict(zip(fields, line.split(',')))
+           phone_book.append(record)	
+
+    return phone_book
+
+def print_phonebook(phonebook):
+    print("Список абонентов:")
+    print()
+    for record in phonebook:
+        print(*record.values(), end = '', sep = ' | ')
+    print()
+main()
