@@ -53,8 +53,8 @@ def read_txt(filename):
 
         for line in phb:
            record = dict(zip(fields, line.split(',')))
-           phone_book.append(record)	
-
+           phone_book.append(record)
+           	
     return phone_book
 
 def print_phonebook(phonebook):
@@ -63,4 +63,20 @@ def print_phonebook(phonebook):
     for record in phonebook:
         print(*record.values(), end = '', sep = ' | ')
     print()
+
+def add_user(phonebook):
+    print("Добавление абонента в справочник")
+    print()
+    fields = ['Фамилия', 'Имя', 'Телефон', 'Описание']
+    record = {}
+    for field in fields:
+        record[field] = input(f'Введите {field}: ')
+    if field != 'Описание':
+        phonebook.append(record)
+    else:
+        record['Описание'] += '\n'
+        phonebook.append(record)
+    print(phonebook)
+    print()
+
 main()
