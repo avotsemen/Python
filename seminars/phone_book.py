@@ -28,7 +28,7 @@ def main():
         elif choice == 3:
             add_user(phonebook)
         elif choice == 4:
-            import_phonebook(phonebook)
+            write_txt(filename, phonebook)
         elif choice == 5:
             break
         else:
@@ -45,7 +45,7 @@ def show_menu():
 
 def read_txt(filename): 
 
-    phone_book=[]
+    phonebook=[]
 
     fields= ['Фамилия', 'Имя', 'Телефон', 'Описание']
 
@@ -53,9 +53,9 @@ def read_txt(filename):
 
         for line in phb:
            record = dict(zip(fields, line.split(',')))
-           phone_book.append(record)
+           phonebook.append(record)
            	
-    return phone_book
+    return phonebook
 
 def print_phonebook(phonebook):
     print("Список абонентов:")
@@ -78,5 +78,18 @@ def add_user(phonebook):
         phonebook.append(record)
     print(phonebook)
     print()
+
+def write_txt(filename , phonebook):
+
+    with open(filename,'w',encoding='utf-8') as phout:
+
+        for i in range(len(phonebook)):
+
+            s=''
+            for v in phonebook[i].values():
+
+                s = s + v + ','
+
+            phout.write(f'{s[:-1]}\n')
 
 main()
