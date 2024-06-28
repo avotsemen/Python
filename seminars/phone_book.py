@@ -1,20 +1,3 @@
-# Создать телефонный справочник с
-# возможностью импорта и экспорта данных в
-# формате .txt. Фамилия, имя, отчество, номер
-# телефона - данные, которые должны находиться
-# в файле.
-# 1. Программа должна выводить данные
-# 2. Программа должна сохранять данные в
-# текстовом файле
-# 3. Пользователь может ввести одну из
-# характеристик для поиска определенной
-# записи(Например имя или фамилию
-# человека)
-# 4. Использование функций. Ваша программа
-# не должна быть линейной
-
-# Файл для хранения данных
-
 filename = 'phone.txt'
 
 def main():
@@ -63,11 +46,17 @@ def read_txt(filename):
     return phonebook
 
 def print_phonebook(phonebook): # 1
-    print("Список абонентов:")
-    print()
-    for record in phonebook:
-        print(*record.values(), end = '', sep = ' | ')
-    print('')
+    if len(phonebook) == 0:
+        print()
+        print('Справочник пуст')
+        print()
+    else:
+        print("Список абонентов:")
+        print()
+        for user in phonebook:
+            for key in user:
+                print(key.ljust(10), ':', user[key])
+
 
 def search_user(phonebook): # 2
     print("Поиск абонента в справочнике")
@@ -114,7 +103,6 @@ def add_user(phonebook): # 3
     else:
         record['Описание'] += '\n'
         phonebook.append(record)
-    print(phonebook)
     print()
 
 def import_user(find_user):
@@ -139,7 +127,6 @@ def delete_user(find_user, phonebook):
             print('Контакт удален из справочника')
     
     return phonebook
-
 
 def write_txt(filename, phonebook):
 
