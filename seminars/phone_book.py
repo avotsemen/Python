@@ -67,15 +67,39 @@ def print_phonebook(phonebook): # 1
     print()
     for record in phonebook:
         print(*record.values(), end = '', sep = ' | ')
-    print()
+    print('')
 
 def search_user(phonebook): # 2
     print("Поиск абонента в справочнике")
     print()
+    find_user = []
     search = input("Введите имя или фамилию абонента: ")
     for record in phonebook:
         if search in record.values():
-            print(*record.values(), end = '', sep = ' | ')
+            find_user.append(record)
+    if len(find_user) == 0:
+        print()
+        print('Абоненты не найдены')
+    else:
+        print()
+        print_phonebook(find_user)
+
+        print("     Выберите действие: \n"
+          "1. Импорт контакта в файл\n"
+          "2. Удалить контакт \n"
+          "3. Вернуться в главное меню")
+        
+        choice = int(input("Выберите необходимое действие: "))
+
+        if choice == 1:
+            import_user(find_user)
+        elif choice == 2:
+            delete_user(find_user, phonebook)
+        elif choice == 3:
+            pass
+        else:
+            print("Неверный выбор. Попробуйте снова.")
+        
     print()
 
 def add_user(phonebook): # 3
@@ -93,7 +117,31 @@ def add_user(phonebook): # 3
     print(phonebook)
     print()
 
-def write_txt(filename , phonebook):
+def import_user(find_user):
+    print("Импорт абонента в справочник")
+    print()
+    import_filename = input("Введите имя файла: ")
+    write_txt(import_filename, find_user)
+    print('\n'
+          f'Контакт  сохранен в файл "{import_filename}"'
+          '\n'
+          ) 
+
+def delete_user(find_user, phonebook):
+
+    print("Удаление абонента из справочника")
+    print()
+    print_phonebook(find_user)
+    print()
+    for user in phonebook:
+        if user in find_user:
+            phonebook.remove(user)
+            print('Контакт удален из справочника')
+    
+    return phonebook
+
+
+def write_txt(filename, phonebook):
 
     with open(filename,'w',encoding='utf-8') as phout:
 
